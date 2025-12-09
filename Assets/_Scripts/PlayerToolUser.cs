@@ -1,183 +1,3 @@
-/*
-using UnityEngine;
-
-public class PlayerToolUser : MonoBehaviour
-{
-    [Header("Raycast Settings")]
-    public Transform toolOrigin;   // where the ray should start (child at chest/hand)
-    public float hitRange = 3.5f;
-
-    // If hitMask is zero, we will raycast against everything.
-    public LayerMask hitMask;    
-
-    [Header("Debug")]
-    public bool drawDebugRay = true;
-
-    void Update()
-    {
-        // Left mouse button
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("[PlayerToolUser] Left click detected, trying tool hit (player-forward)...");
-            TryToolHit();
-        }
-    }
-
-    void TryToolHit()
-    {
-        if (toolOrigin == null)
-        {
-            Debug.LogWarning("[PlayerToolUser] No toolOrigin assigned! Using player position.");
-        }
-
-        // Use toolOrigin if assigned, otherwise fallback to player position
-        Vector3 origin = (toolOrigin != null)
-            ? toolOrigin.position
-            : transform.position + Vector3.up * 1.0f;  // small default height
-
-        Vector3 direction = transform.forward;
-        Ray ray = new Ray(origin, direction);
-
-        if (drawDebugRay)
-        {
-            Debug.DrawRay(ray.origin, ray.direction * hitRange, Color.cyan, 0.5f);
-        }
-
-        RaycastHit hit;
-        bool hitSomething;
-
-        if (hitMask.value == 0)
-        {
-            hitSomething = Physics.Raycast(ray, out hit, hitRange);
-        }
-        else
-        {
-            hitSomething = Physics.Raycast(ray, out hit, hitRange, hitMask);
-        }
-
-        if (!hitSomething)
-        {
-            Debug.Log("[PlayerToolUser] Raycast hit NOTHING.");
-            return;
-        }
-
-        Debug.Log("[PlayerToolUser] Raycast hit: " + hit.collider.name + " on layer " + LayerMask.LayerToName(hit.collider.gameObject.layer));
-
-        // Salt block
-        SaltBlock saltBlock = hit.collider.GetComponent<SaltBlock>();
-        if (saltBlock != null)
-        {
-            Debug.Log("[PlayerToolUser] SaltBlock found, applying hit.");
-            saltBlock.TakePickaxeHit();
-            return;
-        }
-
-        // Later: we can add Ghoul/Ghost Damage here.
-        Debug.Log("[PlayerToolUser] Hit something, but it was not a SaltBlock.");
-    }
-}
-*/
-/*
-using UnityEngine;
-
-public class PlayerToolUser : MonoBehaviour
-{
-    [Header("Raycast Settings")]
-    public Transform toolOrigin;   // where the ray should start (child at chest/hand)
-    public float hitRange = 3.5f;
-
-    // If hitMask is zero, we will raycast against everything.
-    public LayerMask hitMask;    
-
-    [Header("Debug")]
-    public bool drawDebugRay = true;
-
-    // NEW: reference to PlayerEquipment
-    private PlayerEquipment equipment;
-
-    void Awake()
-    {
-        equipment = GetComponent<PlayerEquipment>();
-        if (equipment == null)
-        {
-            Debug.LogWarning("[PlayerToolUser] No PlayerEquipment found on this GameObject. Tool usage will ignore equip slot.");
-        }
-    }
-
-    void Update()
-    {
-        // Left mouse button
-        if (Input.GetMouseButtonDown(0))
-        {
-            // If we have equipment logic, only let tools work when Tool slot is active
-            if (equipment != null)
-            {
-                if (!equipment.IsToolEquipped)
-                {
-                    Debug.Log("[PlayerToolUser] Left click ignored: Tool slot not equipped or no pickaxe owned.");
-                    return;
-                }
-            }
-
-            Debug.Log("[PlayerToolUser] Left click detected, trying tool hit (player-forward)...");
-            TryToolHit();
-        }
-    }
-
-    void TryToolHit()
-    {
-        if (toolOrigin == null)
-        {
-            Debug.LogWarning("[PlayerToolUser] No toolOrigin assigned! Using player position.");
-        }
-
-        // Use toolOrigin if assigned, otherwise fallback to player position
-        Vector3 origin = (toolOrigin != null)
-            ? toolOrigin.position
-            : transform.position + Vector3.up * 1.0f;  // small default height
-
-        Vector3 direction = transform.forward;
-        Ray ray = new Ray(origin, direction);
-
-        if (drawDebugRay)
-        {
-            Debug.DrawRay(ray.origin, ray.direction * hitRange, Color.cyan, 0.5f);
-        }
-
-        RaycastHit hit;
-        bool hitSomething;
-
-        if (hitMask.value == 0)
-        {
-            hitSomething = Physics.Raycast(ray, out hit, hitRange);
-        }
-        else
-        {
-            hitSomething = Physics.Raycast(ray, out hit, hitRange, hitMask);
-        }
-
-        if (!hitSomething)
-        {
-            Debug.Log("[PlayerToolUser] Raycast hit NOTHING.");
-            return;
-        }
-
-        Debug.Log("[PlayerToolUser] Raycast hit: " + hit.collider.name + " on layer " + LayerMask.LayerToName(hit.collider.gameObject.layer));
-
-        // Salt block
-        SaltBlock saltBlock = hit.collider.GetComponent<SaltBlock>();
-        if (saltBlock != null)
-        {
-            Debug.Log("[PlayerToolUser] SaltBlock found, applying hit.");
-            saltBlock.TakePickaxeHit();
-            return;
-        }
-
-        // Later: add Ghoul/Ghost damage here, based on IsWeaponEquipped etc.
-        Debug.Log("[PlayerToolUser] Hit something, but it was not a SaltBlock.");
-    }
-} */
-
 using UnityEngine;
 
 public class PlayerToolUser : MonoBehaviour
@@ -199,6 +19,19 @@ public class PlayerToolUser : MonoBehaviour
 
     [Header("Debug")]
     public bool drawDebugRay = true;
+
+    public enum HotbarSlot
+    {
+        Tool,
+        Weapon,
+        Potion
+    }
+    
+    [Header("Hotbar State")]
+    public HotbarSlot activeSlot = HotbarSlot.Tool;
+
+    [Tooltip("If false, potion slot will never do anything.")]
+    public bool hasPotionUse = false;
 
     private PlayerEquipment equipment;
 
