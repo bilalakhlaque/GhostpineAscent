@@ -13,13 +13,15 @@ public class GameManager : MonoBehaviour
 
     [Header("Win / Lose Scenes")]
     public string winSceneName = "WinScene";
-    public string loseSceneName = "DeathScene"; // or your LoseScene name
+    public string loseSceneName = "DeathScene";
 
     [Header("Enemy Sanity Check")]
     public float enemyCheckInterval = 1f; // how often to verify enemies in the scene
 
     private float enemyCheckTimer = 0f;
     private bool gameEnded = false;       // prevents double win/lose
+
+    private const string GameplaySceneName = "DemoScene";
 
     void Awake()
     {
@@ -35,27 +37,40 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Initial scan of enemies using EnemyHealth (your original logic)
-        EnemyHealth[] allEnemies = FindObjectsOfType<EnemyHealth>();
-        enemiesAlive = 0;
-        foreach (var e in allEnemies)
-        {
-            if (e != null && e.countsAsEnemy)
-                enemiesAlive++;
-        }
+        // Initial scan of enemies in whatever scene we first appear in.
+        RescanEnemiesInScene();
 
         GameLogger.Instance.Log($"[GameManager] Initial enemy count = {enemiesAlive}");
 
-        // Start sanity check at the first interval
         enemyCheckTimer = enemyCheckInterval;
+
+        // Also listen for scene changes so we can reset things if needed
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Whenever we enter the gameplay scene, rescan enemies
+        if (scene.name == GameplaySceneName)
+        {
+            RescanEnemiesInScene();
+            enemyCheckTimer = enemyCheckInterval;
+        }
     }
 
     void Update()
     {
         if (gameEnded) return;
 
-        // Periodically sanity-check enemies in case something died
-        // without calling UnregisterEnemy (e.g. salt ward Destroy).
+        // We only run enemy sanity checks in the gameplay scene
+        Scene current = SceneManager.GetActiveScene();
+        if (current.name != GameplaySceneName) return;
+
         enemyCheckTimer -= Time.deltaTime;
         if (enemyCheckTimer <= 0f)
         {
@@ -66,22 +81,44 @@ public class GameManager : MonoBehaviour
 
     public void ResetStateForNewRun()
     {
-    gameEnded = false;
-    enemiesAlive = 0;
-    soulOrbsRemaining = 0;
-    // anything else you want to reset between runs
+        gameEnded = false;
+        enemiesAlive = 0;
+        soulOrbsRemaining = 0;
+        enemyCheckTimer = enemyCheckInterval;
+
+        PlayerDeathHandler.ResetDeathState();
+
+        // When the gameplay scene loads, RescanEnemiesInScene will populate enemiesAlive again.
+        GameLogger.Instance.Log("[GameManager] State reset for new run.");
+    }
+
+    // ---------- Helper: rescan enemies in current scene ----------
+
+    void RescanEnemiesInScene()
+    {
+        // Use EnemyHealth to find count
+        EnemyHealth[] allEnemies = FindObjectsOfType<EnemyHealth>();
+        int count = 0;
+        foreach (var e in allEnemies)
+        {
+            if (e != null && e.countsAsEnemy)
+                count++;
+        }
+
+        enemiesAlive = count;
+        GameLogger.Instance.Log($"[GameManager] Rescan found {enemiesAlive} enemies in scene {SceneManager.GetActiveScene().name}.");
     }
 
     // ---------- Enemy Sanity Check ----------
 
     void SanityCheckEnemies()
     {
-        // We’ll use the "Enemy" tag to cross-check what actually exists in the scene.
-        // Make sure ALL enemy roots (ghosts, ghouls, witches) are tagged "Enemy".
+        // Make sure only in gameplay scene
+        if (SceneManager.GetActiveScene().name != GameplaySceneName) return;
+
         GameObject[] enemiesInScene = GameObject.FindGameObjectsWithTag("Enemy");
         int actualCount = enemiesInScene.Length;
 
-        // If our counter says 0 OR the actual scene has 0, we treat that as victory.
         if (actualCount == 0)
         {
             if (!gameEnded)
@@ -92,10 +129,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // Keep our counter in sync so the Debug logs stay meaningful
             if (enemiesAlive != actualCount)
             {
-                GameLogger.Instance.Log($"[GameManager] Syncing enemiesAlive from {enemiesAlive} → {actualCount} based on scene.");
+                GameLogger.Instance.Log($"[GameManager] Syncing enemiesAlive from {enemiesAlive} -> {actualCount} based on scene.");
                 enemiesAlive = actualCount;
             }
         }
@@ -130,8 +166,22 @@ public class GameManager : MonoBehaviour
 
     public void Win(string message)
     {
-        if (gameEnded) return;
+        // Prevent double-win or win triggering after death.
+        if (gameEnded)
+        {
+            Debug.Log("[GameManager] Win() ignored because gameEnded is already true.");
+            return;
+        }
+
+        if (PlayerDeathHandler.PlayerIsDead)
+        {
+            Debug.Log("[GameManager] Win() ignored because player is dead.");
+            return;
+        }
+
         gameEnded = true;
+
+        Debug.Log("[GameManager] WIN: " + message);
 
         if (SFXManager.Instance != null)
         {
@@ -139,7 +189,6 @@ public class GameManager : MonoBehaviour
             SFXManager.Instance.PlayPlayerWin();
         }
 
-        GameLogger.Instance.Log("[GameManager] WIN: " + message);
         SceneManager.LoadScene(winSceneName);
     }
 
@@ -158,24 +207,23 @@ public class GameManager : MonoBehaviour
 
         if (soulOrbsRemaining == 0)
         {
-            // Let GameManager own the lose logic once.
             Lose("The ghosts devoured all the trapped souls.");
         }
     }
 
     public void Lose(string message)
-{
-    if (gameEnded) return;
-    gameEnded = true;
-
-    if (SFXManager.Instance != null)
     {
-        SFXManager.Instance.StopAllSFX();
-        SFXManager.Instance.PlayPlayerDeath();
+        if (gameEnded) return;
+        gameEnded = true;
+
+        if (SFXManager.Instance != null)
+        {
+            SFXManager.Instance.StopAllSFX();
+            SFXManager.Instance.PlayPlayerDeath();
+        }
+
+        GameLogger.Instance.Log("[GameManager] LOSE: " + message);
+
+        SceneManager.LoadScene(loseSceneName);
     }
-
-    GameLogger.Instance.Log("[GameManager] LOSE: " + message);
-
-    SceneManager.LoadScene(loseSceneName);
-}
 }

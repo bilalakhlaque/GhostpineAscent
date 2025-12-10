@@ -9,7 +9,7 @@ public class TopDownController : MonoBehaviour
     [Header("Bounds & Falling")]
     public Vector2 clampXRange = new Vector2(1f, 48f);
     public Vector2 clampZRange = new Vector2(1f, 48f);
-    public float fallDeathY = -5f;  // if player falls below this and has no protection → death
+    public float fallDeathY = -5f;  // if player falls below this and has no protection -> death
     [Header("Sprint / Potions")]
     public bool hasFallProtection = false;
     public bool hasHermesBlessing = false;
@@ -93,7 +93,7 @@ public class TopDownController : MonoBehaviour
         }
         else
         {
-            // Fall protection ON → clamp X/Z so we stay on the island
+            // Fall protection ON -> clamp X/Z so we stay on the island
             pos.x = Mathf.Clamp(pos.x, clampXRange.x, clampXRange.y);
             pos.z = Mathf.Clamp(pos.z, clampZRange.x, clampZRange.y);
             transform.position = pos;

@@ -12,7 +12,7 @@ public class SaltWardZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // If a ghost touches the salt, it is dispelled
+        // If a ghost touches the salt, it is DISPELLED
         SpectralGhostAI ghost = other.GetComponent<SpectralGhostAI>();
         if (ghost != null)
         {

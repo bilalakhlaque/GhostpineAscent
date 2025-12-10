@@ -62,7 +62,7 @@ public class SaltManager : MonoBehaviour
             if (Physics.CheckSphere(pos, saltRadius, obstacleMask))
                 continue;
 
-            // Success
+            // Success!!!!!!
             Instantiate(saltBlockPrefab, pos, Quaternion.identity);
             return;
         }

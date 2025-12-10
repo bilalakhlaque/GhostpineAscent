@@ -893,14 +893,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5235034073679543895, guid: dbde59b7c9ef74286ad8e1aea160ca45, type: 3}
-      propertyPath: enemyAttackVolume
-      value: 0.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 6646561831682353555, guid: dbde59b7c9ef74286ad8e1aea160ca45, type: 3}
-      propertyPath: m_Volume
-      value: 0.305
-      objectReference: {fileID: 0}
     - target: {fileID: 8727044161513898505, guid: dbde59b7c9ef74286ad8e1aea160ca45, type: 3}
       propertyPath: m_Name
       value: _Audio

@@ -3,13 +3,13 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [Header("Target")]
-    public Transform target;          // player
+    public Transform target;          
 
     [Header("Orbit")]
     public Vector3 offset = new Vector3(0f, 4f, -6f);
     public float followSmooth = 10f;
-    public float yaw;                 // horizontal angle
-    public float pitch = 20f;         // vertical angle
+    public float yaw;                 // horizontal angle, we are rotating about the y-axis
+    public float pitch = 20f;         // vertical angle, we are rotating about the x-axis
     public float minPitch = -10f;
     public float maxPitch = 60f;
 

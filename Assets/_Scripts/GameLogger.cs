@@ -7,8 +7,8 @@ public class GameLogger : MonoBehaviour
     public static GameLogger Instance;
 
     [Header("UI References")]
-    public Transform logContainer; // The Content object of a ScrollView or just a Panel
-    public GameObject textPrefab;  // A prefab with just a TextMeshProUGUI component
+    public Transform logContainer;
+    public GameObject textPrefab;  
 
     [Header("Settings")]
     public int maxLogLines = 8;

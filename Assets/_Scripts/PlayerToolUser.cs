@@ -181,7 +181,7 @@ public class PlayerToolUser : MonoBehaviour
 
         GameLogger.Instance.Log("[PlayerToolUser] Weapon ray hit: " + hit.collider.name + " on layer " + LayerMask.LayerToName(hit.collider.gameObject.layer));
 
-        // Is it an enemy?
+        // Is it an enemy...?
         EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
         if (enemy != null)
         {

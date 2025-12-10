@@ -3,20 +3,36 @@ using UnityEngine.SceneManagement;
 
 public static class PlayerDeathHandler
 {
-    // Call this whenever the player should die for ANY reason.
-    public static void Die(string reason)
-    {
-        GameLogger.Instance.Log("[Death] " + reason);
+    // This flag ensures death only happens once
+    public static bool PlayerIsDead { get; private set; } = false;
 
-        // Prefer to go through GameManager so it sets gameEnded and handles SFX + scene.
-        if (GameManager.Instance != null)
+    public static void Die(string message)
+    {
+        // Prevent multiple deaths or conflicts with win logic
+        if (PlayerIsDead)
         {
-            GameManager.Instance.Lose(reason);
+            Debug.Log("[DeathHandler] Die() called but player is already dead.");
+            return;
         }
-        else
+
+        PlayerIsDead = true;
+
+        Debug.Log("[Death] " + message);
+
+        // Stop all audio, then play death sound once
+        if (SFXManager.Instance != null)
         {
-            // Fallback: if GameManager isn't in the scene for some reason
-            //SceneManager.LoadScene("DeathScene");
+            SFXManager.Instance.StopAllSFX();
+            SFXManager.Instance.PlayPlayerDeath();
         }
+
+        // Load our Death Scene, '3'...
+        SceneManager.LoadScene("DeathScene");
+    }
+
+    // Reset should be called when reloading the main game scene
+    public static void ResetDeathState()
+    {
+        PlayerIsDead = false;
     }
 }

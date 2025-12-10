@@ -15,8 +15,6 @@ public class KeyPickup : MonoBehaviour
             return;
 
         keys.AddKey(keyId);
-
-        // Later: play sound, VFX, etc.
         SFXManager.Instance?.PlayPickupResource();
         Destroy(gameObject);
     }

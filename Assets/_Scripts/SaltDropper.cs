@@ -4,8 +4,8 @@ public class SaltDropper : MonoBehaviour
 {
     [Header("Salt Ward Settings")]
     public GameObject saltWardPrefab;     // prefab to drop
-    public Transform dropOrigin;          // usually player feet; fallback to player position
-    public float dropHeightOffset = 0.1f; // lift slightly above ground
+    public Transform dropOrigin;          
+    public float dropHeightOffset = 0.1f; 
     public int saltPerDrop = 1;           // how much salt this costs
     public KeyCode dropKey = KeyCode.Space;
 
@@ -51,7 +51,5 @@ public class SaltDropper : MonoBehaviour
 
         if (SFXManager.Instance != null)
             SFXManager.Instance.PlayOneShot(SFXManager.Instance.dropSaltClip);
-
-        // If you have a HUD, you could call HUD.UpdateSalt(inventory.saltCount) here.
     }
 }

@@ -20,18 +20,17 @@ public class HouseManager : MonoBehaviour
     public LayerMask obstacleMask;  // Mountains, trees, other houses
 
     [Header("Spacing")]
-    public float houseRadius = 4f;     // Radius to check for walls/trees (increased for safety)
+    public float houseRadius = 4f;     // Radius to check for walls/trees
     public float minDistanceBetweenHouses = 10f; // Prevent houses from clustering
 
     [Header("Vertical")]
-    // If your house pivot is at the bottom, set this to 0. If center, set to Height/2.
+    
     public float houseHeightOffset = 0f;  
 
     public int maxAttemptsPerHouse = 100;
 
     void Awake()
     {
-        // Auto-configure masks if forgotten in Inspector
         if (groundMask.value == 0)
         {
             // Tries to find a layer named "Ground", otherwise defaults to Everything
@@ -112,7 +111,7 @@ public class HouseManager : MonoBehaviour
                 }
                 if (tooClose) continue; 
 
-                // 4) Success! Place house
+                // 4) Success!!!!!!! Place house
                 Instantiate(housePrefab, candidatePos, Quaternion.identity);
                 occupiedPositions.Add(candidatePos);
                 placed = true;

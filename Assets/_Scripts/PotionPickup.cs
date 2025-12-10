@@ -18,7 +18,7 @@ public class PotionPickup : MonoBehaviour
 
         PlayerStats stats = other.GetComponent<PlayerStats>();
         TopDownController controller = other.GetComponent<TopDownController>();
-        PlayerInventory inventory = other.GetComponent<PlayerInventory>(); // if you want to track potions
+        PlayerInventory inventory = other.GetComponent<PlayerInventory>(); // if we want to track potions
 
         switch (potionType)
         {
@@ -64,9 +64,8 @@ public class PotionPickup : MonoBehaviour
             }
         }
 
-        // Later: play sound/VFX here
         if (SFXManager.Instance != null)
-    SFXManager.Instance.PlayPickupPotion();
+            SFXManager.Instance.PlayPickupPotion();       
         
         Destroy(gameObject);
     }

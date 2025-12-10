@@ -51,7 +51,7 @@ public class SFXManager : MonoBehaviour
     
     [Header("UI")]
     public AudioClip uiButtonClickClip;
-[   Range(0f, 1f)] public float uiButtonClickVolume = 0.7f;
+    [Range(0f, 1f)] public float uiButtonClickVolume = 0.7f;
 
     void Awake()
     {
@@ -115,7 +115,7 @@ public class SFXManager : MonoBehaviour
         PlayOneShot(pickaxeSwingClip, pickaxeSwingVolume);
 
     public void PlayUIButtonClick() =>
-    PlayOneShot(uiButtonClickClip, uiButtonClickVolume);
+        PlayOneShot(uiButtonClickClip, uiButtonClickVolume);
 
     public void StopAllSFX()
     {

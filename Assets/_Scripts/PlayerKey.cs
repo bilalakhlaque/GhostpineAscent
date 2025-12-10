@@ -23,7 +23,7 @@ public class PlayerKeys : MonoBehaviour
         return keySet.Contains(keyId);
     }
 
-    // Optional: if you want keys to be consumed when used
+    // I want keys to be consumed when used
     public void UseKey(int keyId)
     {
         if (keySet.Remove(keyId))

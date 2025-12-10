@@ -9,7 +9,6 @@ public class PlayerInventory : MonoBehaviour
     {
         saltCount += amount;
         GameLogger.Instance.Log("Salt collected. Total salt = " + saltCount);
-        // Later: update UI here.
     }
 
     [Header("Wood")]
@@ -19,6 +18,5 @@ public class PlayerInventory : MonoBehaviour
     {
         woodCount += amount;
         GameLogger.Instance.Log("Wood collected. Total wood = " + woodCount);
-        // Later: update UI here.
     }
 }

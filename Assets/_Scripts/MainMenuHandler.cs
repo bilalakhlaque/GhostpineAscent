@@ -3,36 +3,31 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuHandler : MonoBehaviour
 {
-    void PlayClick()
+    void Start()
     {
-        if (SFXManager.Instance != null)
-        {
-            SFXManager.Instance.PlayUIButtonClick();
-        }
+        // Unlock and show cursor when entering any Menu/Death scene
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void PlayGame()
     {
-        PlayClick();
-
+        // Reset game state before starting a new run
         if (GameManager.Instance != null)
         {
             GameManager.Instance.ResetStateForNewRun();
         }
-
-        SceneManager.LoadScene("DemoScene"); 
+        SceneManager.LoadScene(1);
     }
 
     public void ReturnToMenu()
     {
-        PlayClick();
-        SceneManager.LoadScene("MainMenu"); 
+        SceneManager.LoadScene(0);
     }
 
     public void QuitGame()
     {
-        PlayClick();
-        Debug.Log("Quitting Game..");
+        Debug.Log("Quitting Game...");
         Application.Quit();
     }
 }

@@ -47,8 +47,6 @@ public class EnemyHealth : MonoBehaviour
             GameManager.Instance.UnregisterEnemy();
         }
 
-        // Later: drop loot, play effects etc.
-
         if (destroyOnDeath)
         {
             Destroy(gameObject);

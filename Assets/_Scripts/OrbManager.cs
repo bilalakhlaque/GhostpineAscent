@@ -34,32 +34,6 @@ public class OrbManager : MonoBehaviour
         }
     }
 
-    /*void SpawnOrb()
-    {
-        for (int attempt = 0; attempt < maxAttemptsPerOrb; attempt++)
-        {
-            float x = Random.Range(spawnXRange.x, spawnXRange.y);
-            float z = Random.Range(spawnZRange.x, spawnZRange.y);
-
-            Vector3 origin = new Vector3(x, raycastHeight, z);
-
-            // Draw a ray in Scene view so you can see where we are sampling
-            Debug.DrawRay(origin, Vector3.down * (raycastHeight * 2f), Color.yellow, 2f);
-
-            if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, raycastHeight * 2f, groundMask))
-            {
-                Vector3 spawnPos = hit.point + Vector3.up * orbHeightOffset;
-
-                GameObject orb = Instantiate(orbPrefab, spawnPos, Quaternion.identity, transform);
-                activeOrbs.Add(orb.transform);
-
-                return;
-            }
-        }
-
-        Debug.LogWarning("OrbManager: Failed to find a valid orb spawn position after max attempts.");
-    }*/
-
     void SpawnOrb()
     {
         for (int attempt = 0; attempt < maxAttemptsPerOrb; attempt++)

@@ -1,59 +1,3 @@
-/*
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MountainGenerator : MonoBehaviour
-{
-    [Header("Mountain Settings")]
-    public int mapSize = 50; // Size of the area
-    public float scale = 8f; // How "zoomed in" the noise is
-    
-    [Header("Prefabs")]
-    public GameObject floorPrefab; // The ground tile
-    public GameObject wallPrefab; // The unclimbable mountains
-    public GameObject obstaclePrefab; // Trees or rocks in the valley
-
-    void Start()
-    {
-        GenerateValley();
-    }
-
-    void GenerateValley()
-    {
-        for (int x = 0; x < mapSize; x++)
-        {
-            for (int z = 0; z < mapSize; z++)
-            {
-                Vector3 pos = new Vector3(x, 0, z);
-                
-                // 1. Calculate height using Perlin Noise
-                // We offset by 100 to get a different part of the noise texture
-                float xCoord = (float)x / mapSize * scale;
-                float zCoord = (float)z / mapSize * scale;
-                float height = Mathf.PerlinNoise(xCoord + 100, zCoord + 100);
-
-                // 2. Logic: High values = Walls (Mountain), Low values = Floor (Valley)
-                if (height > 0.6f) 
-                {
-                    // Spawn Mountain Wall (Blocker)
-                    Instantiate(wallPrefab, pos + Vector3.up, Quaternion.identity, transform);
-                }
-                else 
-                {
-                    // Spawn Floor
-                    GameObject floor = Instantiate(floorPrefab, pos, Quaternion.identity, transform);
-                    
-                    // Optional: Randomly spawn an obstacle in the valley
-                    if (Random.value > 0.95f)
-                    {
-                        Instantiate(obstaclePrefab, pos + Vector3.up * 0.5f, Quaternion.identity, transform);
-                    }
-                }
-            }
-        }
-    }
-} */
-
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -94,14 +38,14 @@ public class MountainGenerator : MonoBehaviour
                 // Threshold is 0.6f
                 if (noiseVal > 0.6f) 
                 {
-                    // --- NEW VARIABLE HEIGHT LOGIC ---
+                    // --- VARIABLE HEIGHT LOGIC ---
                     
                     // Calculate dynamic height based on how "intense" the noise is (0.6 to 1.0)
                     float noiseDifference = noiseVal - 0.6f; 
                     float finalHeight = minMountainHeight + (noiseDifference * heightMultiplier);
 
                     // Create the wall
-                    // Note: If your pivot is in the CENTER, we move Y up by half the height so it sits on 0.
+                    // Note: If our pivot is in the CENTER, we move Y up by half the height so it sits on 0.
                     Vector3 mountainPos = new Vector3(x, finalHeight / 2f, z);
                     
                     GameObject wall = Instantiate(wallPrefab, mountainPos, Quaternion.identity, transform);

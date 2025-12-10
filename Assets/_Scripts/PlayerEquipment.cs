@@ -12,8 +12,7 @@ public class PlayerEquipment : MonoBehaviour
     [Header("Current Equipment")]
     public EquipSlot currentSlot = EquipSlot.Tool;
 
-    // For now, assume we always have a pickaxe.
-    // Later we can make these toggled by pickups.
+    // Assume we always have a pickaxe.
     [Header("Owned Items")]
     public bool hasPickaxe = true;
     public bool hasSword = false;
@@ -40,10 +39,9 @@ public class PlayerEquipment : MonoBehaviour
     {
         currentSlot = slot;
         GameLogger.Instance.Log($"[PlayerEquipment] Selected slot: {currentSlot}");
-        // Later: update UI highlight here.
     }
 
-    // Helper properties the rest of the code can ask
+    // Helper properties
     public bool IsToolEquipped => currentSlot == EquipSlot.Tool && hasPickaxe;
     public bool IsWeaponEquipped => currentSlot == EquipSlot.Weapon && hasSword;
     public bool IsPotionEquipped => currentSlot == EquipSlot.Potion && hasPotionUse;

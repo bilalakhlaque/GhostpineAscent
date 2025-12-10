@@ -3,7 +3,7 @@ using UnityEngine;
 public class HotbarSpawner : MonoBehaviour
 {
     [Header("Where to Spawn")]
-    public Transform handHolder; // Drag your "Hand" or "WeaponHolder" object here
+    public Transform handHolder;
 
     [Header("Item Prefabs")]
     public GameObject pickaxePrefab; // Press 1
