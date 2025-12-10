@@ -14,7 +14,7 @@ public class PlayerKeys : MonoBehaviour
         {
             keySet.Add(keyId);
             ownedKeyIds.Add(keyId);
-            Debug.Log("[PlayerKeys] Picked up key " + keyId);
+            GameLogger.Instance.Log("[PlayerKeys] Picked up key " + keyId);
         }
     }
 
@@ -29,7 +29,7 @@ public class PlayerKeys : MonoBehaviour
         if (keySet.Remove(keyId))
         {
             ownedKeyIds.Remove(keyId);
-            Debug.Log("[PlayerKeys] Used key " + keyId);
+            GameLogger.Instance.Log("[PlayerKeys] Used key " + keyId);
         }
     }
 }

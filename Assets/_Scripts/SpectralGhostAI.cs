@@ -141,7 +141,7 @@ public class SpectralGhostAI : MonoBehaviour
     {
         if (other.CompareTag("Orb"))
         {
-            Debug.Log("Eating Orb!");
+            GameLogger.Instance.Log("GHOST ATE A SOUL!");
 
             // Keep OrbManager list clean
             OrbManager.activeOrbs.Remove(other.transform);

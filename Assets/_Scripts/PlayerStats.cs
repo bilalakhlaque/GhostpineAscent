@@ -21,7 +21,7 @@ public class PlayerStats : MonoBehaviour
         if (amount <= 0f) return;
 
         currentHealth -= amount;
-        Debug.Log($"[PlayerStats] Took {amount} physical damage. HP = {currentHealth}/{maxHealth}");
+        GameLogger.Instance.Log($"[PlayerStats] Took {amount} physical damage. HP = {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0f)
         {
@@ -38,7 +38,7 @@ public class PlayerStats : MonoBehaviour
         if (amount <= 0f) return;
 
         currentSanity -= amount;
-        Debug.Log($"[PlayerStats] Took {amount} sanity damage. Sanity = {currentSanity}/{maxSanity}");
+        GameLogger.Instance.Log($"[PlayerStats] Took {amount} sanity damage. Sanity = {currentSanity}/{maxSanity}");
 
         if (currentSanity <= 0f)
         {

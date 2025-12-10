@@ -3,16 +3,20 @@ using UnityEngine.SceneManagement;
 
 public static class PlayerDeathHandler
 {
+    // Call this whenever the player should die for ANY reason.
     public static void Die(string reason)
     {
-        Debug.Log("[Death] " + reason);
+        GameLogger.Instance.Log("[Death] " + reason);
 
-        if (SFXManager.Instance != null)
+        // Prefer to go through GameManager so it sets gameEnded and handles SFX + scene.
+        if (GameManager.Instance != null)
         {
-            SFXManager.Instance.StopAllSFX();
-            SFXManager.Instance.PlayPlayerDeath(); // jingle right before swap (or move this to death scene)
+            GameManager.Instance.Lose(reason);
         }
-
-        UnityEngine.SceneManagement.SceneManager.LoadScene("DeathScene");
+        else
+        {
+            // Fallback: if GameManager isn't in the scene for some reason
+            //SceneManager.LoadScene("DeathScene");
+        }
     }
 }

@@ -48,6 +48,10 @@ public class SFXManager : MonoBehaviour
 
     public AudioClip pickaxeSwingClip;
     [Range(0f, 1f)] public float pickaxeSwingVolume = 0.8f;
+    
+    [Header("UI")]
+    public AudioClip uiButtonClickClip;
+[   Range(0f, 1f)] public float uiButtonClickVolume = 0.7f;
 
     void Awake()
     {
@@ -109,6 +113,9 @@ public class SFXManager : MonoBehaviour
 
     public void PlayPickaxeSwing() =>
         PlayOneShot(pickaxeSwingClip, pickaxeSwingVolume);
+
+    public void PlayUIButtonClick() =>
+    PlayOneShot(uiButtonClickClip, uiButtonClickVolume);
 
     public void StopAllSFX()
     {

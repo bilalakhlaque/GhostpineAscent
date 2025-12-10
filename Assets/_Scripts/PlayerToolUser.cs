@@ -58,7 +58,7 @@ public class PlayerToolUser : MonoBehaviour
 
             if (equipment.IsToolEquipped)
             {
-                Debug.Log("[PlayerToolUser] Left click → Tool hit.");
+                GameLogger.Instance.Log("[PlayerToolUser] Left click → Tool hit.");
                 if (SFXManager.Instance != null)
                 {
                     SFXManager.Instance.PlayPickaxeSwing();
@@ -67,7 +67,7 @@ public class PlayerToolUser : MonoBehaviour
             }
             else if (equipment.IsWeaponEquipped)
             {
-                Debug.Log("[PlayerToolUser] Left click → Weapon hit.");
+                GameLogger.Instance.Log("[PlayerToolUser] Left click → Weapon hit.");
                 if (SFXManager.Instance != null)
                 {
                     SFXManager.Instance.PlaySwordSwing();
@@ -130,7 +130,7 @@ public class PlayerToolUser : MonoBehaviour
         SaltBlock saltBlock = hit.collider.GetComponent<SaltBlock>();
         if (saltBlock != null)
         {
-            Debug.Log("[PlayerToolUser] SaltBlock found, applying hit.");
+            GameLogger.Instance.Log("[PlayerToolUser] SaltBlock found, applying hit.");
             saltBlock.TakePickaxeHit();
             return;
         }
@@ -141,7 +141,7 @@ public class PlayerToolUser : MonoBehaviour
         WoodBlock woodBlock = hit.collider.GetComponent<WoodBlock>();
         if (woodBlock != null)
         {
-            Debug.Log("[PlayerToolUser] WoodBlock found, applying hit.");
+            GameLogger.Instance.Log("[PlayerToolUser] WoodBlock found, applying hit.");
             woodBlock.TakePickaxeHit();
             return;
         }
@@ -179,13 +179,13 @@ public class PlayerToolUser : MonoBehaviour
             return;
         }
 
-        Debug.Log("[PlayerToolUser] Weapon ray hit: " + hit.collider.name + " on layer " + LayerMask.LayerToName(hit.collider.gameObject.layer));
+        GameLogger.Instance.Log("[PlayerToolUser] Weapon ray hit: " + hit.collider.name + " on layer " + LayerMask.LayerToName(hit.collider.gameObject.layer));
 
         // Is it an enemy?
         EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
         if (enemy != null)
         {
-            Debug.Log("[PlayerToolUser] EnemyHealth found, dealing damage.");
+            GameLogger.Instance.Log("[PlayerToolUser] EnemyHealth found, dealing damage.");
             enemy.TakeDamage(weaponDamage);
             return;
         }

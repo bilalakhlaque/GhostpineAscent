@@ -26,7 +26,7 @@ public class PotionPickup : MonoBehaviour
                 if (controller != null)
                 {
                     controller.hasFallProtection = true;
-                    Debug.Log("[PotionPickup] Fall protection acquired.");
+                    GameLogger.Instance.Log("[PotionPickup] Fall protection acquired.");
                 }
                 break;
 
@@ -34,7 +34,7 @@ public class PotionPickup : MonoBehaviour
                 if (controller != null)
                 {
                     controller.hasHermesBlessing = true;
-                    Debug.Log("[PotionPickup] Hermes blessing acquired.");
+                    GameLogger.Instance.Log("[PotionPickup] Hermes blessing acquired.");
                 }
                 break;
 
@@ -53,11 +53,11 @@ public class PotionPickup : MonoBehaviour
 
                         float healed = stats.currentHealth - oldHP;
 
-                        Debug.Log($"[PotionPickup] Health potion restored {healed} HP. Now {stats.currentHealth}/{stats.maxHealth}");
+                        GameLogger.Instance.Log($"[PotionPickup] Health potion restored {healed} HP. Now {stats.currentHealth}/{stats.maxHealth}");
                     }
                     else
                     {
-                        Debug.Log("[PotionPickup] Health potion wasted: already at full HP.");
+                        GameLogger.Instance.Log("[PotionPickup] Health potion wasted: already at full HP.");
                     }
                 }
                 break;

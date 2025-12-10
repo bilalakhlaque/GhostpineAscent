@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
         if (isDead) return;
 
         currentHealth -= amount;
-        Debug.Log($"[EnemyHealth] {gameObject.name} took {amount} damage. HP = {currentHealth}/{maxHealth}");
+        GameLogger.Instance.Log($"[EnemyHealth] {gameObject.name} took {amount} damage. HP = {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0f)
         {
@@ -40,7 +40,7 @@ public class EnemyHealth : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        Debug.Log($"[EnemyHealth] {gameObject.name} died.");
+        GameLogger.Instance.Log($"[EnemyHealth] {gameObject.name} died.");
 
         if (countsAsEnemy && GameManager.Instance != null)
         {

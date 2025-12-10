@@ -16,7 +16,7 @@ public class SaltWardZone : MonoBehaviour
         SpectralGhostAI ghost = other.GetComponent<SpectralGhostAI>();
         if (ghost != null)
         {
-            Debug.Log("[SaltWardZone] Ghost touched salt and was dispelled.");
+            GameLogger.Instance.Log("[SaltWardZone] Ghost touched salt and was dispelled.");
             Destroy(ghost.gameObject);
             Destroy(gameObject); // consume the salt ward
         }

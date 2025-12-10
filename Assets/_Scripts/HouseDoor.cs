@@ -55,7 +55,7 @@ public class HouseDoor : MonoBehaviour
 
         if (keys.HasKey(houseId))
         {
-            Debug.Log("[HouseDoor] Player has key " + houseId + ", opening door.");
+            GameLogger.Instance.Log("[HouseDoor] Player has key " + houseId + ", opening door.");
 
             if (consumeKeyOnOpen)
             {
@@ -66,7 +66,7 @@ public class HouseDoor : MonoBehaviour
         }
         else
         {
-            Debug.Log("[HouseDoor] Player does NOT have key " + houseId + ".");
+            GameLogger.Instance.Log("[HouseDoor] Player does NOT have key " + houseId + ".");
         }
     }
 

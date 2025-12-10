@@ -36,7 +36,7 @@ public class SaltDropper : MonoBehaviour
 
         if (inventory.saltCount < saltPerDrop)
         {
-            Debug.Log("[SaltDropper] Not enough salt to drop.");
+            GameLogger.Instance.Log("[SaltDropper] Not enough salt to drop.");
             return;
         }
 
@@ -47,7 +47,7 @@ public class SaltDropper : MonoBehaviour
         Instantiate(saltWardPrefab, pos, Quaternion.identity);
 
         inventory.saltCount -= saltPerDrop;
-        Debug.Log($"[SaltDropper] Dropped salt. Remaining salt = {inventory.saltCount}");
+        GameLogger.Instance.Log($"[SaltDropper] Dropped salt. Remaining salt = {inventory.saltCount}");
 
         if (SFXManager.Instance != null)
             SFXManager.Instance.PlayOneShot(SFXManager.Instance.dropSaltClip);

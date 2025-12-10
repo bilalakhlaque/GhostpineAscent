@@ -6,7 +6,7 @@ public class WoodBlock : MonoBehaviour
     public int maxHits = 4;                    // how many axe hits to break
     public GameObject woodLogPrefab;          // the pickup we drop
     public int woodDropped = 1;                // how much wood this block yields
-    public Vector3 dropOffset = Vector3.up * 0.5f;
+    public Vector3 dropOffset = Vector3.up * 0.5f; // offset for spawn position
 
     private int currentHits = 0;
 
@@ -15,7 +15,7 @@ public class WoodBlock : MonoBehaviour
     public void TakePickaxeHit()
     {
         currentHits++;
-        Debug.Log("Wood block hit " + currentHits + "/" + maxHits);
+        GameLogger.Instance.Log("Wood block hit " + currentHits + "/" + maxHits);
 
         if (currentHits >= maxHits)
         {

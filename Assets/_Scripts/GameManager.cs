@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
                 enemiesAlive++;
         }
 
-        Debug.Log($"[GameManager] Initial enemy count = {enemiesAlive}");
+        GameLogger.Instance.Log($"[GameManager] Initial enemy count = {enemiesAlive}");
 
         // Start sanity check at the first interval
         enemyCheckTimer = enemyCheckInterval;
@@ -64,6 +64,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ResetStateForNewRun()
+    {
+    gameEnded = false;
+    enemiesAlive = 0;
+    soulOrbsRemaining = 0;
+    // anything else you want to reset between runs
+    }
+
     // ---------- Enemy Sanity Check ----------
 
     void SanityCheckEnemies()
@@ -78,7 +86,7 @@ public class GameManager : MonoBehaviour
         {
             if (!gameEnded)
             {
-                Debug.Log("[GameManager] Sanity check: no enemies found in scene. Triggering win.");
+                GameLogger.Instance.Log("[GameManager] Sanity check: no enemies found in scene. Triggering win.");
                 OnAllEnemiesDefeated();
             }
         }
@@ -87,7 +95,7 @@ public class GameManager : MonoBehaviour
             // Keep our counter in sync so the Debug logs stay meaningful
             if (enemiesAlive != actualCount)
             {
-                Debug.Log($"[GameManager] Syncing enemiesAlive from {enemiesAlive} → {actualCount} based on scene.");
+                GameLogger.Instance.Log($"[GameManager] Syncing enemiesAlive from {enemiesAlive} → {actualCount} based on scene.");
                 enemiesAlive = actualCount;
             }
         }
@@ -98,13 +106,13 @@ public class GameManager : MonoBehaviour
     public void RegisterEnemy()
     {
         enemiesAlive++;
-        Debug.Log($"[GameManager] Enemy registered. Enemies alive = {enemiesAlive}");
+        GameLogger.Instance.Log($"[GameManager] Enemy registered. Enemies alive = {enemiesAlive}");
     }
 
     public void UnregisterEnemy()
     {
         enemiesAlive = Mathf.Max(0, enemiesAlive - 1);
-        Debug.Log($"[GameManager] Enemy unregistered. Enemies alive = {enemiesAlive}");
+        GameLogger.Instance.Log($"[GameManager] Enemy unregistered. Enemies alive = {enemiesAlive}");
 
         if (enemiesAlive == 0)
         {
@@ -116,7 +124,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameEnded) return;
 
-        Debug.Log("[GameManager] All enemies defeated! Triggering win.");
+        GameLogger.Instance.Log("[GameManager] All enemies defeated! Triggering win.");
         Win("You cleansed Ghostpine of its horrors.");
     }
 
@@ -131,7 +139,7 @@ public class GameManager : MonoBehaviour
             SFXManager.Instance.PlayPlayerWin();
         }
 
-        Debug.Log("[GameManager] WIN: " + message);
+        GameLogger.Instance.Log("[GameManager] WIN: " + message);
         SceneManager.LoadScene(winSceneName);
     }
 
@@ -140,13 +148,13 @@ public class GameManager : MonoBehaviour
     public void RegisterSoulOrb()
     {
         soulOrbsRemaining++;
-        Debug.Log($"[GameManager] Soul orb registered. Remaining = {soulOrbsRemaining}");
+        GameLogger.Instance.Log($"[GameManager] Soul orb registered. Remaining = {soulOrbsRemaining}");
     }
 
     public void OnSoulOrbDestroyedByGhost()
     {
         soulOrbsRemaining = Mathf.Max(0, soulOrbsRemaining - 1);
-        Debug.Log($"[GameManager] Soul orb destroyed by ghost. Remaining = {soulOrbsRemaining}");
+        GameLogger.Instance.Log($"[GameManager] Soul orb destroyed by ghost. Remaining = {soulOrbsRemaining}");
 
         if (soulOrbsRemaining == 0)
         {
@@ -156,22 +164,18 @@ public class GameManager : MonoBehaviour
     }
 
     public void Lose(string message)
+{
+    if (gameEnded) return;
+    gameEnded = true;
+
+    if (SFXManager.Instance != null)
     {
-        if (gameEnded) return;
-        gameEnded = true;
-
-        if (SFXManager.Instance != null)
-        {
-            SFXManager.Instance.StopAllSFX();
-            SFXManager.Instance.PlayPlayerDeath();
-        }
-
-        Debug.Log("[GameManager] LOSE: " + message);
-
-        // If you still want PlayerDeathHandler.Die to do extra work (UI text etc),
-        // you can call it here instead of or in addition to LoadScene:
-        // PlayerDeathHandler.Die(message);
-
-        SceneManager.LoadScene(loseSceneName);
+        SFXManager.Instance.StopAllSFX();
+        SFXManager.Instance.PlayPlayerDeath();
     }
+
+    GameLogger.Instance.Log("[GameManager] LOSE: " + message);
+
+    SceneManager.LoadScene(loseSceneName);
+}
 }

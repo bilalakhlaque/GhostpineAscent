@@ -14,7 +14,7 @@ public class SaltBlock : MonoBehaviour
     public void TakePickaxeHit()
     {
         currentHits++;
-        Debug.Log("Salt block hit " + currentHits + "/" + maxHits);
+        GameLogger.Instance.Log("Salt block hit " + currentHits + "/" + maxHits);
 
         if (currentHits >= maxHits)
         {

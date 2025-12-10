@@ -39,7 +39,7 @@ public class PlayerEquipment : MonoBehaviour
     void SetSlot(EquipSlot slot)
     {
         currentSlot = slot;
-        Debug.Log($"[PlayerEquipment] Selected slot: {currentSlot}");
+        GameLogger.Instance.Log($"[PlayerEquipment] Selected slot: {currentSlot}");
         // Later: update UI highlight here.
     }
 

@@ -9,14 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Level_1_Scene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/0.unity
-    guid: 79b3820d9c61b45ed9f0669841101b8d
+    path: Assets/Scenes/MainMenu.unity
+    guid: 6aa48871b10964359840562d20e621dc
   - enabled: 1
-    path: Assets/Scenes/DeathScene.unity
-    guid: a5ffce30397e64bf98c8a1129335caf6
+    path: Assets/Scenes/DemoScene.unity
+    guid: 79b3820d9c61b45ed9f0669841101b8d
   - enabled: 1
     path: Assets/Scenes/WinScene.unity
     guid: 92786a7c5f7594e34803f7bb630826dc
+  - enabled: 1
+    path: Assets/Scenes/DeathScene.unity
+    guid: a5ffce30397e64bf98c8a1129335caf6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

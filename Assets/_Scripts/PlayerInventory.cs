@@ -8,7 +8,7 @@ public class PlayerInventory : MonoBehaviour
     public void AddSalt(int amount)
     {
         saltCount += amount;
-        Debug.Log("Salt collected. Total salt = " + saltCount);
+        GameLogger.Instance.Log("Salt collected. Total salt = " + saltCount);
         // Later: update UI here.
     }
 
@@ -18,7 +18,7 @@ public class PlayerInventory : MonoBehaviour
     public void AddWood(int amount)
     {
         woodCount += amount;
-        Debug.Log("Wood collected. Total wood = " + woodCount);
+        GameLogger.Instance.Log("Wood collected. Total wood = " + woodCount);
         // Later: update UI here.
     }
 }
