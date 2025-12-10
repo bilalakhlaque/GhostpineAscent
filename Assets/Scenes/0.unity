@@ -347,6 +347,10 @@ MonoBehaviour:
   enemyAttackVolume: 0.8
   ghostEatOrbClip: {fileID: 8300000, guid: 9ab82042fbb36458089753bd03df7e66, type: 3}
   ghostEatOrbVolume: 0.07
+  swordSwingClip: {fileID: 8300000, guid: d97bed6de61af41a38b07bede1b39bd8, type: 3}
+  swordSwingVolume: 0.8
+  pickaxeSwingClip: {fileID: 8300000, guid: eb082aa1def924d7fb8a355990a42f84, type: 3}
+  pickaxeSwingVolume: 0.8
 --- !u!4 &143294616
 Transform:
   m_ObjectHideFlags: 0
@@ -1549,6 +1553,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MountainGenerator
   mapSize: 50
   scale: 8
+  minMountainHeight: 2
+  heightMultiplier: 15
   floorPrefab: {fileID: 7527525976529440490, guid: dc0e30c262b2c40d6b22f809f421779c, type: 3}
   wallPrefab: {fileID: 4852350209191861791, guid: 6401cfdca19294243bceae227036d392, type: 3}
   obstaclePrefab: {fileID: 1926249288851049, guid: 4a103654611954b8b80e5ba6d79e686f, type: 3}
@@ -1582,7 +1588,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6143715191083270347, guid: e6cb79a9e647c487388c161f3af3df8b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.584023
+      value: 7.16
       objectReference: {fileID: 0}
     - target: {fileID: 6143715191083270347, guid: e6cb79a9e647c487388c161f3af3df8b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1590,7 +1596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6143715191083270347, guid: e6cb79a9e647c487388c161f3af3df8b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.2840354
+      value: 5.97
       objectReference: {fileID: 0}
     - target: {fileID: 6143715191083270347, guid: e6cb79a9e647c487388c161f3af3df8b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2134,7 +2140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1137339899603759790, guid: 0808b0548128948cab100d32a7beee6b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.27343
+      value: 6.45
       objectReference: {fileID: 0}
     - target: {fileID: 1137339899603759790, guid: 0808b0548128948cab100d32a7beee6b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2142,7 +2148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1137339899603759790, guid: 0808b0548128948cab100d32a7beee6b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.99422
+      value: 7.46
       objectReference: {fileID: 0}
     - target: {fileID: 1137339899603759790, guid: 0808b0548128948cab100d32a7beee6b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3192,7 +3198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HouseManager
   housePrefab: {fileID: 3813804318085885221, guid: 09154f7869f644e8ca757a8d89e8340e, type: 3}
-  numberOfHouses: 1
+  numberOfHouses: 3
   spawnXRange: {x: 2, y: 48}
   spawnZRange: {x: 2, y: 48}
   groundMask:
@@ -3201,8 +3207,8 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 64
-  houseRadius: 4
-  minDistanceBetweenHouses: 8
+  houseRadius: 3
+  minDistanceBetweenHouses: 6
   houseHeightOffset: 0.9
   maxAttemptsPerHouse: 50
 --- !u!4 &1354216979
@@ -3826,7 +3832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1581498802742694635, guid: 36924f6cd963347b2b36e2556cc53293, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.6596155
+      value: 5.72
       objectReference: {fileID: 0}
     - target: {fileID: 1581498802742694635, guid: 36924f6cd963347b2b36e2556cc53293, type: 3}
       propertyPath: m_LocalRotation.w
