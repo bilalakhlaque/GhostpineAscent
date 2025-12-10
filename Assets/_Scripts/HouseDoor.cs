@@ -83,5 +83,6 @@ public class HouseDoor : MonoBehaviour
         }
 
         doorHinge.localRotation = openRotation;
+        SFXManager.Instance?.PlayDoorOpen();
     }
 }

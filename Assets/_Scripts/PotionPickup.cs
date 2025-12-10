@@ -1,47 +1,3 @@
-
-/*
-using UnityEngine;
-
-public class PotionPickup : MonoBehaviour
-{
-    public enum PotionType
-    {
-        FallProtection,
-        HermesBlessing
-    }
-
-    [Header("Potion Settings")]
-    public PotionType potionType;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        // Only react to player
-        if (!other.CompareTag("Player"))
-            return;
-
-        TopDownController controller = other.GetComponent<TopDownController>();
-        if (controller == null)
-            return;
-
-        switch (potionType)
-        {
-            case PotionType.FallProtection:
-                controller.hasFallProtection = true;
-                Debug.Log("Potion: Fall Protection acquired.");
-                break;
-
-            case PotionType.HermesBlessing:
-                controller.hasHermesBlessing = true;
-                Debug.Log("Potion: Hermes Blessing acquired.");
-                break;
-        }
-
-        // Destroy the potion object after pickup
-        Destroy(gameObject);
-    }
-}
-*/
-
 using UnityEngine;
 
 public class PotionPickup : MonoBehaviour
@@ -109,6 +65,9 @@ public class PotionPickup : MonoBehaviour
         }
 
         // Later: play sound/VFX here
+        if (SFXManager.Instance != null)
+    SFXManager.Instance.PlayPickupPotion();
+        
         Destroy(gameObject);
     }
 }

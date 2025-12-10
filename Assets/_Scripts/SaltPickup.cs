@@ -14,7 +14,9 @@ public class SaltPickup : MonoBehaviour
         {
             inv.AddSalt(saltAmount);
         }
-
+        
+        SFXManager.Instance?.PlayPickupResource();
+        
         Destroy(gameObject);
     }
 }

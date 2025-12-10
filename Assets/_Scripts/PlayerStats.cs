@@ -28,6 +28,9 @@ public class PlayerStats : MonoBehaviour
             currentHealth = 0f;
             PlayerDeathHandler.Die(deathMessageIfKilled);
         }
+
+        if (SFXManager.Instance != null)
+            SFXManager.Instance.PlayOneShot(SFXManager.Instance.playerHurtClip);
     }
 
     public void TakeSanityDamage(float amount, string deathMessageIfKilled)
@@ -42,5 +45,8 @@ public class PlayerStats : MonoBehaviour
             currentSanity = 0f;
             PlayerDeathHandler.Die(deathMessageIfKilled);
         }
+
+        if (SFXManager.Instance != null)
+            SFXManager.Instance.PlayOneShot(SFXManager.Instance.playerHurtClip);
     }
 }

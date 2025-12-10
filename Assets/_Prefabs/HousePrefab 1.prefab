@@ -105,10 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1d4a01eb32e4292ade6c1290c128f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WoodBlock
-  maxHits: 7
-  woodLogPrefab: {fileID: 0}
+  maxHits: 5
+  woodLogPrefab: {fileID: 6296262447050577720, guid: a313d394db09a41caa5816a2214c84d0, type: 3}
   woodDropped: 3
-  dropOffset: {x: 0, y: 0.3, z: 0}
+  dropOffset: {x: 0, y: 0.1, z: 0}
 --- !u!65 &7175314092475965002
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -129,7 +129,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.9999999, y: 40, z: 2.000377}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -10, z: 0}
 --- !u!1 &1694192551217829467
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,9 +454,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WoodBlock
   maxHits: 3
-  woodLogPrefab: {fileID: 0}
+  woodLogPrefab: {fileID: 6296262447050577720, guid: a313d394db09a41caa5816a2214c84d0, type: 3}
   woodDropped: 2
-  dropOffset: {x: 0, y: 0.3, z: 0}
+  dropOffset: {x: 0, y: 0.1, z: 0}
 --- !u!65 &7219656347546935839
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class WoodPickup : MonoBehaviour
             inv.AddWood(woodAmount);
         }
 
+        SFXManager.Instance?.PlayPickupResource();
         Destroy(gameObject);
     }
 }

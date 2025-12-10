@@ -47,5 +47,7 @@ public class WitchShooter : MonoBehaviour
         Instantiate(projectilePrefab, spawn.position, spawn.rotation);
 
         // GrowingHomingBomb handles movement and damage itself.
+        if (SFXManager.Instance != null)
+            SFXManager.Instance.PlayOneShot(SFXManager.Instance.enemyAttackClip);
     }
 }

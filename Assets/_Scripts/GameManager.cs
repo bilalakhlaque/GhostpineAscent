@@ -68,6 +68,11 @@ public class GameManager : MonoBehaviour
 
     public void Win(string message)
     {
+        if (SFXManager.Instance != null)
+        {
+        SFXManager.Instance.StopAllSFX();
+        SFXManager.Instance.PlayPlayerWin();
+        }
         Debug.Log("[GameManager] WIN: " + message);
         SceneManager.LoadScene(winSceneName);
     }

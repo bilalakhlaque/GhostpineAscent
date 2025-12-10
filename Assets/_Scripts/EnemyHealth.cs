@@ -53,5 +53,8 @@ public class EnemyHealth : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (SFXManager.Instance != null)
+            SFXManager.Instance.PlayOneShot(SFXManager.Instance.enemyDeathClip);
+
     }
 }

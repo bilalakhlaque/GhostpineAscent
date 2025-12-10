@@ -3,11 +3,16 @@ using UnityEngine.SceneManagement;
 
 public static class PlayerDeathHandler
 {
-    public static string LastCauseOfDeath = "";
-
-    public static void Die(string cause)
+    public static void Die(string reason)
     {
-        LastCauseOfDeath = cause;
-        SceneManager.LoadScene("DeathScene");
+        Debug.Log("[Death] " + reason);
+
+        if (SFXManager.Instance != null)
+        {
+            SFXManager.Instance.StopAllSFX();
+            SFXManager.Instance.PlayPlayerDeath(); // jingle right before swap (or move this to death scene)
+        }
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("DeathScene");
     }
 }

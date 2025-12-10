@@ -59,11 +59,19 @@ public class PlayerToolUser : MonoBehaviour
             if (equipment.IsToolEquipped)
             {
                 Debug.Log("[PlayerToolUser] Left click → Tool hit.");
+                if (SFXManager.Instance != null)
+                {
+                    SFXManager.Instance.PlayPickaxeSwing();
+                }
                 TryToolHit();
             }
             else if (equipment.IsWeaponEquipped)
             {
                 Debug.Log("[PlayerToolUser] Left click → Weapon hit.");
+                if (SFXManager.Instance != null)
+                {
+                    SFXManager.Instance.PlaySwordSwing();
+                }
                 TryWeaponHit();
             }
             else
