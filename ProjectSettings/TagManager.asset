@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Orb
   - Salt
+  - Enemy
   layers:
   - Default
   - TransparentFX
