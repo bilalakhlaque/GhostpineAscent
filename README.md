@@ -4,6 +4,12 @@ Ghostpine Ascent is a 3D top-down game project built in Unity using C#. The proj
 
 ---
 
+## Demo Video
+
+[![Watch Demo](Assets/_Materials/Main_Menu.JPG)](https://youtu.be/MWgpN65a-Ek)
+
+---
+
 ## Overview
 
 Ghostpine Ascent was developed as a game systems project to explore how procedural generation, pathfinding, player interaction, and modular architecture can work together inside a Unity-based 3D environment.
@@ -98,26 +104,6 @@ Game Manager
 
 ---
 
-## Screenshots
-
-```text
-assets/
-├── gameplay-preview.png
-├── terrain-generation.png
-├── enemy-ai.png
-├── inventory-system.png
-├── combat-system.png
-└── demo-thumbnail.png
-```
-
----
-
-## Demo Video
-
-[![Watch Demo](assets/demo-thumbnail.png)](https://youtu.be/YOUR_VIDEO_ID)
-
----
-
 ## Project Documentation
 
 <details>
@@ -154,12 +140,9 @@ This project strengthened my understanding of:
 
 ## Future Improvements
 
-- Add additional enemy behaviors and AI states
 - Expand procedural terrain variety
-- Improve combat feedback and animations
 - Add save/load functionality
 - Add UI polish and player progression systems
-- Improve level balancing and difficulty scaling
 - Package a playable build for release
 
 ---
