@@ -6,7 +6,7 @@ Ghostpine Ascent is a 3D top-down game project built in Unity using C#. The proj
 
 ## Demo Video
 
-[(Assets/_Materials/Main_Menu.JPG)]
+[!(Assets/_Materials/Main_Menu.JPG)]
 
 ---
 
